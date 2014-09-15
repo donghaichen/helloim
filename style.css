@@ -1,0 +1,567 @@
+@charset "utf-8";
+
+/*
+
+Theme Name: hello i'm (with ajax)
+
+Theme URI: http://mingthings.com/blog/
+
+Description: Based on stephpunk's theme "hello i'm", using ajax to display post content on the index page.
+
+Author: Ming Yeung
+
+version: 1.1
+
+Author URI: http://mingthings.com/blog/
+
+Tags: ajax, portfolio, silver, light, flexible-width, threaded-comments
+
+*/
+
+/* @group Basic */
+
+html {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #000000;
+	font-family: Trebuchet MS, Arial;
+	font-size: 13px;
+	line-height: 1.7;
+	background: url(images/bg.gif) repeat #f1f1ec;
+	/*to ensure single-post display correctly on index*/
+	min-width: 645px;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+a:hover {
+	color: #8aad21;
+}
+
+img, a img {
+	border: none;
+}
+
+blockquote {
+	margin: 0;
+	padding: 10px;
+	border-left: 3px solid #eeeeee;
+	background-color: #f1f1ec;
+	color: #666666;
+}
+
+pre {
+	overflow: auto;
+	margin: 0;
+	padding: 10px;
+	background-color: #f1f1ec;
+	color: #666666;
+}
+
+fieldset {
+	border: 1px solid #cccccc;
+	padding: 10px;
+}
+
+.buttonMode {
+	cursor: pointer;
+}
+
+/* @end */
+
+/* @group features */
+
+.postlink {
+	overflow: hidden;
+	display: block;
+	position: relative;
+}
+
+div.featured-image {
+	height: 190px;
+	overflow: hidden;
+}
+
+.post-desc {
+	color: #FFF;
+	background-color: #000;
+	opacity: 0;
+	display: none;
+	position: absolute;
+	z-index: 1;
+	width: 245px;
+	height: 150px;
+	padding: 20px;
+	font-size: 105%;
+}
+
+.loadingGif {
+	background: url(images/dots32.gif) no-repeat center 55%;
+}
+
+/* @end */
+
+/* @group Layout */
+
+#container {
+	width: auto;
+	margin: 0px auto;
+	padding: 0px 0px 50px 0px;
+}
+
+#header {
+	width: auto;
+	margin: 0px;
+	height: auto;
+	padding: 90px 0px 80px 22px;
+	font-size: 11px;
+	color: #a8a89b;
+	overflow: hidden;
+	background: url(images/topbg.jpg) no-repeat 30% 0%;
+}
+
+#header_text {
+	font-family: georgia, serif;
+	font-size: 22px;
+	font-style: italic;
+}
+
+#header_text a {
+	text-decoration: none;
+}
+
+#grid-wrapper {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 500px;
+/* Prevent flicker in grid area. Check header.php. */
+}
+
+#footer {
+	margin: 0px auto;
+	padding: 0px 0px 50px 16px;
+	font-size: 10px;
+	color: #a8a89b;
+}
+
+#footer a {
+	color: #a8a89b;
+}
+
+#footer a:hover {
+	color: #8aad21;
+}
+
+/* @end */
+
+/* @group Menu bar ( edit php in sidebar.php ) */
+
+.menu {
+	margin-top: 5px;
+	padding: 0;
+}
+
+.menu a {
+	color: #a8a89b;
+}
+
+.cat-title {
+	margin: 0;
+	padding: 0;
+	color: #a8a89b;
+}
+
+.cat-show {
+	display: none;
+	height: auto;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	color: black;
+	overflow: hidden;
+}
+
+.cat-show li {
+	width: 170px;
+	height: auto;
+	list-style: none;
+	display: block;
+	border-bottom: 1px solid #ddddd5;
+	padding: 3px 0px 3px 5px;
+	float: left;
+	margin: 0px 15px 0px 0px;
+}
+
+.cat-item li:hover {
+	background-color: #eae9e4;
+}
+
+/* @end */
+
+/* @group Grids */
+
+/* value = (width * n) + (15+15+15) * (n-1). 
+ * ex.
+ * width=200 : 200, 425, 650, 875
+ * width=250 : 250, 525, 800, 1075
+ * width=290 : 290, 615, 940, 1265
+ */
+
+div.x1 {
+	width: 285px;
+	background: url(images/grid_top.jpg) no-repeat top center #ffffff;
+	padding: 22px 15px 15px 15px;
+	overflow: hidden;
+}
+
+div.x2 {
+	width: 615px;
+	background: url(images/grid_topx2.jpg) no-repeat top center #ffffff;
+	padding: 22px 15px 15px 15px;
+}
+
+div.x2 p {
+	padding: 0px;
+	margin: 0px 0px 15px 0px;
+}
+
+div.x3 {
+	width: 945px;
+	background: url(images/grid_topx3.jpg) no-repeat top center #ffffff;
+	padding: 22px 15px 15px 15px;
+}
+
+div.x3 p {
+	padding: 0px;
+	margin: 0px 0px 15px 0px;
+}
+
+div.x4 {
+	width: 1275px;
+}
+
+div.grid-item {
+	overflow: hidden;
+	margin: 0px 8px 0px 7px;
+	border: 0;
+}
+
+div.grid-bottom {
+	margin: -1px -15px -15px -15px;
+	padding-top: 3px;
+	background: url(images/grid_bottom.jpg) no-repeat bottom center #fff;
+	height: 20px;
+}
+
+div.grid-bottom-x2 {
+	margin: -1px -15px -15px -15px;
+	padding-top: 3px;
+	background: url(images/grid_bottomx2.jpg) no-repeat bottom center #fff;
+	height: 20px;
+}
+
+div.grid-bottom-x3 {
+	margin: -1px -15px -15px -15px;
+	padding-top: 3px;
+	background: url(images/grid_bottomx3.jpg) no-repeat bottom center #fff;
+	height: 20px;
+}
+
+div.grid-item h2.post-title {
+	font: 13px Trebuchet MS, Arial;
+	font-weight: bold;
+	color: #000000;
+	display: block;
+	height: 18px;
+	margin: 12px 0 8px 0;
+	padding: 1px 0 0 5px;
+	border-left: 3px solid #ddd;
+	overflow: hidden;
+}
+
+div.grid-item div.wp-caption {
+	display: none;
+}
+
+div.post-body p img,
+
+div.post-body p object {
+	max-width: 100%;
+	padding: 0;
+}
+
+div.post-meta, div.single-post-meta {
+	font-size: 10px;
+	color: #a8a89b;
+	display: block;
+}
+
+div.post-meta a, div.single-post-meta a {
+	color: #333;
+}
+
+div.single-post-meta {
+	height: 17px;
+}
+
+div.post-meta span.post-cats,
+div.post-meta span.post-tags {
+	display: block;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* @end */
+
+/* @group Single (ajaxed) */
+
+.single-post-detail {
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.single-post-btns {
+	float: right;
+	margin: 0 10px;
+	color: #666;
+	font-weight: bold;
+	display: block;
+}
+
+.btn-close-single {
+	
+}
+
+/* @end */
+
+/* @group Single */
+
+h1, h2, h3 {
+	font-family: Georgia, Serif;
+	font-style: italic;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	color: #8aad21;
+}
+
+h1 {
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 14px;
+}
+
+h3 {
+	font-size: 13px;
+}
+
+h1 a, h3 a {
+	color: #8aad21;
+}
+
+.portfolio-des a {
+	color: #a8a89b;
+}
+
+.portfolio-des a:hover {
+	color: #8aad21;
+}
+
+div.single-middle {
+	height: 41px;
+	margin: 1px -15px;
+	background: url(images/grid_middle.jpg) no-repeat bottom center #fff;
+}
+
+div.single-middlex3 {
+	height: 41px;
+	margin: 1px -15px;
+	background: url(images/grid_middlex3.jpg) no-repeat bottom center #fff;
+}
+
+div.entry {
+	margin: -9px 0px 0px 0px;
+	padding: 0;
+}
+
+.sharing {
+	width: 100%;
+	margin-top: -20px;
+	float: right;
+	text-align: right;
+	overflow: hidden;
+}
+
+/* @end */
+
+/* @group Pagination */
+
+.pagination {
+	margin: 50px 8px 0px 7px;
+	padding: 0px;
+}
+
+.page-numbers {
+	margin: 0px 10px 0px 0px;
+	padding: 10px 15px 10px 15px;
+	text-decoration: none;
+	background: #ffffff;
+}
+
+.page-numbers:hover {
+	background-color: #dddddd;
+	color: white;
+}
+
+.current {
+	font-weight: bold;
+	text-decoration: overline;
+	color: #8aad21;
+}
+
+/* @end */
+
+/* @group Comment */
+
+ol.commentlist {
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+}
+
+ol.commentlist li {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ol.commentlist li p {
+	font-family: Arial;
+	line-height: 170%;
+	padding: 0px;
+	margin: 0px 0px 15px 0px;
+}
+
+.comment-body {
+	padding: 8px 0px 7px 0px;
+	margin: 0px;
+}
+
+ul.children {
+	margin-left: 10px;
+	border-left: 3px solid #eeeeee;
+	padding-left: 10px;
+}
+
+.commentmetadata, .commentmetadata a {
+	font-size: 10px;
+	color: #a8a89b;
+}
+
+cite.fn {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.comment-author, vcard {
+	margin: 0;
+	padding: 0;
+}
+
+.reply {
+	text-align: left;
+	padding-right: 10px;
+}
+
+.reply a {
+	color: #a8a89b;
+}
+
+.reply a:hover, .commentmetadata a:hover {
+	color: #7aaa30;
+}
+
+textarea {
+	background-color: #f1f1ec;
+	width: 285px;
+	border: none;
+}
+
+input {
+	background-color: #f1f1ec;
+	width: 130px;
+	border: none;
+}
+
+input#submit {
+	width: 285px;
+}
+
+/* @end */
+
+/* @group Alignment */
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 2px 10px;
+}
+
+.alignleft {
+	float: left;
+	margin: 0 10px 2px 0;
+}
+
+img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img.alignright {
+	padding: 5px;
+	display: inline;
+}
+
+img.alignleft {
+	padding: 5px;
+	display: inline;
+}
+
+.caution {
+	padding: 10px;
+	color: #e9e9e9;
+	text-align: center;
+	background-color: #cc0000;
+}
+
+noscript .caution {
+	margin: 0;
+}
+
+code strong {
+	color: #000000;
+	font-weight: normal;
+}
+
+/* @end */
